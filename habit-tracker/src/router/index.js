@@ -1,25 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home'
+import HomePage from '@/views/HomePage'
+import NavBar from '@/components/NavBar'
+import SideBar from '@/components/SideBar'
 
 Vue.use(VueRouter)
+
+const navBarComponent = (name) => {
+	return {
+		path: '',
+		name: name,
+		component: (resolve) => resolve(NavBar),
+	}
+}
 
 const routes = [
 	{
 		path: '/',
-		name: 'Home',
-		component: Home,
+		component: HomePage,
+		children: [navBarComponent('homePage')],
 	},
-	// {
-	//   path: '/about',
-	//   name: 'About',
-	//   // route level code-splitting
-	//   // this generates a separate chunk (about.[hash].js) for this route
-	//   // which is lazy-loaded when the route is visited.
-	//   component: function () {
-	//     return import(/* webpackChunkName: "about" */ '../views/About.vue')
-	//   }
-	// }
 ]
 
 const router = new VueRouter({
