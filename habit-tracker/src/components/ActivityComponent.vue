@@ -1,19 +1,18 @@
 <template>
 	<div>
 		<router-view />
-		<div class="main">START</div>
+		<div class="activity">activity</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'StartComponent',
+		name: 'ActivityComponent',
 	}
 </script>
 
-//
 <style lang="scss" scoped>
-	.main {
+	.activity {
 		margin-left: 15%;
 		height: calc(100vh - 50px);
 	}

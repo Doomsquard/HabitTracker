@@ -1,17 +1,11 @@
 <template>
 	<div>
 		<div class="navbar navbar-expand-lg navbar-light bg-white">
-			<div class="navbar__leftside">
+			<div class="navbar__leftside" style="cursor:pointer" @click="mainHandler">
 				Habit Tracker
 			</div>
 			<div class="navbar__rightside">
 				<div class="navbar__rightside__avatar">
-					<!-- <b-dropdown toggle-class="text-decoration-none p-0" no-caret>
-						<template #button-content></template>
-						<b-dropdown-item href="#">A</b-dropdown-item>
-						<b-dropdown-item href="#">A</b-dropdown-item>
-						<b-dropdown-item href="#">S</b-dropdown-item>
-					</b-dropdown> -->
 					<div @click="showProfileDropdawn = !showProfileDropdawn">
 						<b-avatar alt="profile"></b-avatar>
 					</div>
@@ -28,19 +22,28 @@
 				</div>
 			</div>
 		</div>
-		<aside class="aside">aside</aside>
+		<SideBar />
 	</div>
 </template>
 
 <script>
+	import SideBar from '@/components/SideBar'
+
 	export default {
 		name: 'navBar',
+		components: { SideBar },
 		data() {
 			return {
 				showProfileDropdawn: false,
 			}
 		},
-		methods: {},
+		methods: {
+			mainHandler() {
+				if (this.$router.history.current.name !== 'homePage') {
+					this.$router.push({ name: 'homePage' })
+				}
+			},
+		},
 	}
 </script>
 
@@ -83,29 +86,6 @@
 		}
 	}
 	.navbar::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 100%;
-		height: 4px;
-		background: linear-gradient(
-			180deg,
-			rgba(9, 30, 66, 0.13) 0,
-			rgba(9, 30, 66, 0.13) 1px,
-			rgba(9, 30, 66, 0.08) 1px,
-			rgba(9, 30, 66, 0) 4px
-		);
-	}
-	.aside {
-		position: absolute;
-		width: 15%;
-		height: calc(100vh - 40px);
-		border-right: 1px solid lightgrey;
-		overflow-y: hidden;
-		min-width: 100px;
-	}
-	.aside::after {
 		content: '';
 		position: absolute;
 		left: 0;

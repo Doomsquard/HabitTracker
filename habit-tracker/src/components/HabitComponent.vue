@@ -1,19 +1,18 @@
 <template>
 	<div>
 		<router-view />
-		<div class="main">START</div>
+		<div class="habit">habit</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'StartComponent',
+		name: 'HabitComponent',
 	}
 </script>
 
-//
 <style lang="scss" scoped>
-	.main {
+	.habit {
 		margin-left: 15%;
 		height: calc(100vh - 50px);
 	}
