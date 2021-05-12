@@ -5,12 +5,17 @@
 </template>
 
 <style lang="scss">
+	html {
+		height: 100vh;
+	}
+
 	#app {
 		font-family: Lato, Avenir, Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
 		color: #2c3e50;
+		height: 100vh;
 	}
 
 	* {

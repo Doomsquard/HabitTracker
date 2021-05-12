@@ -13,9 +13,9 @@
 				<img class="aside__nav__item__img" src="@/assets/img/stats.svg" alt="stats" />
 				<p class="aside__nav__item__title">Statistics</p>
 			</div>
-			<div :class="['aside__nav__item', activityMenu]" @click="activeHandler('menuPage')">
-				<img class="aside__nav__item__img" src="@/assets/img/menu.svg" alt="menu" />
-				<p class="aside__nav__item__title">Menu</p>
+			<div :class="['aside__nav__item', activityMenu]" @click="activeHandler('balancePage')">
+				<img class="aside__nav__item__img" src="@/assets/img/wheel.svg" alt="Balance" />
+				<p class="aside__nav__item__title" style="white-space: nowrap;">Balance Wheel</p>
 			</div>
 		</div>
 	</aside>
@@ -48,7 +48,7 @@
 				return this.currentLocation === 'statsPage' ? 'activeTab' : ''
 			},
 			activityMenu() {
-				return this.currentLocation === 'menuPage' ? 'activeTab' : ''
+				return this.currentLocation === 'balancePage' ? 'activeTab' : ''
 			},
 			activityHabits() {
 				return this.currentLocation === 'habitPage' ? 'activeTab' : ''
@@ -64,7 +64,10 @@
 		height: calc(100vh - 40px);
 		border-right: 1px solid lightgrey;
 		overflow-y: hidden;
-		min-width: 100px;
+		min-width: 170px;
+		z-index: 5;
+		background-color: #fff;
+		margin-top: 2px;
 		&__nav {
 			display: flex;
 			justify-content: center;

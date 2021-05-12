@@ -4,7 +4,7 @@ import HomePage from '@/views/HomePage'
 import ActivityPage from '@/views/ActivityPage'
 import HabitPage from '@/views/HabitPage'
 import StatsPage from '@/views/StatsPage'
-import MenuPage from '@/views/MenuPage'
+import BalancePage from '@/views/BalancePage'
 import NavBar from '@/components/NavBar'
 
 Vue.use(VueRouter)
@@ -39,9 +39,9 @@ const routes = [
 		children: [navBarComponent('statsPage')],
 	},
 	{
-		path: '/menu',
-		component: MenuPage,
-		children: [navBarComponent('menuPage')],
+		path: '/balance',
+		component: BalancePage,
+		children: [navBarComponent('balancePage')],
 	},
 ]
 
