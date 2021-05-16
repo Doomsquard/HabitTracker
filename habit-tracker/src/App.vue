@@ -7,6 +7,7 @@
 <style lang="scss">
 	html {
 		height: 100vh;
+		overflow: hidden;
 	}
 
 	#app {

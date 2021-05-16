@@ -15,7 +15,6 @@ export default {
 	type: 'doughnut',
 	props: ['chartdata', 'options'],
 	mounted() {
-		console.log()
 		// Overwriting base render method with actual data.
 		this.renderChart(this.chartdata, this.options)
 	},

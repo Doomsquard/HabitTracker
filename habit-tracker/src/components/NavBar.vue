@@ -11,11 +11,15 @@
 					</div>
 				</div>
 				<div class="navbar__rightside__dropdawn" v-show="showProfileDropdawn">
-					<div class="navbar__rightside__dropdawn__item" style="padding: 5px 8px 0 0;">
+					<div
+						class="navbar__rightside__dropdawn__item"
+						style="padding: 5px 8px 0 0;"
+						@click="settingHandler"
+					>
 						<p>Settings</p>
 						<b-icon style="opacity:0.5" icon="gear-fill" aria-hidden="true" scale="1.2"></b-icon>
 					</div>
-					<div style="margin-bottom:10px" class="navbar__rightside__dropdawn__item">
+					<div @click="logout" style="margin-bottom:10px" class="navbar__rightside__dropdawn__item">
 						<p>Log out</p>
 						<img style="max-width: 20px;opacity:0.5;" src="@/assets/img/logout.svg" alt="" />
 					</div>
@@ -42,6 +46,15 @@
 				if (this.$router.history.current.name !== 'homePage') {
 					this.$router.push({ name: 'homePage' })
 				}
+			},
+			logout() {
+				this.$store.dispatch('tokenModule/logoutUser')
+				localStorage.removeItem('access_token')
+				deleteCookie('jwtRefresh')
+				this.$router.push({ name: 'signInPage' })
+			},
+			settingHandler() {
+				if (this.$router.history.current.path !== '/setting') this.$router.push({ path: '/setting' })
 			},
 		},
 	}

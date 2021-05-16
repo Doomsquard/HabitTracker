@@ -6,6 +6,10 @@ import HabitPage from '@/views/HabitPage'
 import StatsPage from '@/views/StatsPage'
 import BalancePage from '@/views/BalancePage'
 import NavBar from '@/components/NavBar'
+import signPage from '@/views/SignPage'
+import SettingPage from '@/views/SettingPage'
+
+import store from '@/store/index'
 
 Vue.use(VueRouter)
 
@@ -18,11 +22,6 @@ const navBarComponent = (name) => {
 }
 
 const routes = [
-	{
-		path: '/',
-		component: HomePage,
-		children: [navBarComponent('homePage')],
-	},
 	{
 		path: '/activity',
 		component: ActivityPage,
@@ -43,6 +42,28 @@ const routes = [
 		component: BalancePage,
 		children: [navBarComponent('balancePage')],
 	},
+	{
+		path: '/setting',
+		component: SettingPage,
+		children: [navBarComponent('settingPage')],
+	},
+	{
+		path: '/signin',
+		name: 'signInPage',
+		component: signPage,
+	},
+	{
+		path: '/signup',
+		name: 'signUpPage',
+		component: signPage,
+	},
+	{
+		path: '/*',
+		name: 'notFindPath',
+		redirect: {
+			path: '/activity',
+		},
+	},
 ]
 
 const router = new VueRouter({
@@ -51,11 +72,18 @@ const router = new VueRouter({
 	routes,
 })
 
-// router.beforeEach((to, from, next) => {
-// 	// console.log(to, from)
-// 	if (router.history.current.name !== to.name) {
-// 		next()
-// 	}
-// })
+router.beforeEach((to, from, next) => {
+	if (to.name !== 'signUpPage' && to.name !== 'signInPage') {
+		store.dispatch('tokenModule/checkToken')
+	}
+	const currentUser = store.getters['tokenModule/getToken']
+
+	if (!currentUser && router.history.current.path !== '/signin' && to.path !== '/signin') {
+		next('/signin')
+	} else {
+		next()
+	}
+	next()
+})
 
 export default router

@@ -2,8 +2,27 @@
 	<div>
 		<router-view />
 		<div class="activity">
+			<ActivityModal
+				v-if="modalACtivity"
+				:currentDay="modalDay"
+				:currentMonth="modalMonth"
+				@closeWindow="closeWindow"
+			/>
+			<ActivityTrackModal v-if="modalTrackActivity" @closeWindow="closeWindow" />
 			<div class="activity__wrapper">
-				<div class="activity__wrapper__menu">calendar\track activity here</div>
+				<div class="activity__wrapper__menu">
+					<input
+						type="month"
+						id="start"
+						name="start"
+						min="2021-05"
+						@change="(e) => changeDate(e)"
+						value="2021-05"
+					/>
+					<b-button class="activity__wrapper__menu__track" @click="trackActivityHandler"
+						>Track Activity</b-button
+					>
+				</div>
 				<div class="activity__wrapper__wrap">
 					<div
 						class="activity__wrapper__cards"
@@ -11,7 +30,7 @@
 						:key="dayData.day"
 						:id="dayData.day"
 					>
-						<div class="activity__wrapper__card">
+						<div class="activity__wrapper__card" :ref="dayData.day">
 							<div
 								class="activity__wrapper__card__title"
 								style="display:flex;justify-content:space-between"
@@ -34,7 +53,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="activity__wrapper__card__footer">
+							<div
+								class="activity__wrapper__card__footer"
+								@click="addNewActivity(dayData.day, monthName[currentMonth])"
+							>
 								<div class="activity__wrapper__card__footer_wrapper">
 									<img src="@/assets/img/plus.svg" width="20" height="20" alt="add new item" />
 								</div>
@@ -48,16 +70,23 @@
 </template>
 
 <script>
+	import ActivityModal from './activityModal'
+	import ActivityTrackModal from './activityTrackModal'
+
 	export default {
 		name: 'ActivityComponent',
+		components: { ActivityModal, ActivityTrackModal },
 		data() {
 			return {
 				currentDay: null,
 				currentMonth: null,
 				currentYear: null,
 				dayOfWeek: 1,
+				modalDay: null,
+				modalMonth: null,
 				countDays: 30,
 				objectLoad: [],
+				value: null,
 				monthName: {
 					0: 'January',
 					1: 'February',
@@ -65,16 +94,20 @@
 					3: 'April',
 					4: 'May',
 					5: 'June',
+					6: 'July',
+					7: 'August',
 				},
 				dayName: {
+					0: 'Sunday',
 					1: 'Monday',
 					2: 'Tuesday',
 					3: 'Wednesday',
 					4: 'Thursday',
 					5: 'Friday',
 					6: 'Saturday',
-					7: 'Sunday',
 				},
+				modalACtivity: false,
+				modalTrackActivity: false,
 			}
 		},
 		async mounted() {
@@ -82,18 +115,29 @@
 			this.currentMonth = new Date(Date.now()).getMonth()
 			this.currentYear = new Date(Date.now()).getFullYear()
 			this.dayOfWeek = new Date(Date.now()).getDay()
-			await this.daysInMonth()
-			await this.loadData()
-
-			this.$el.children[1].children[0].children[1].scrollLeft = this.currentDay * 303
+			await this.loadCards()
 		},
 		methods: {
+			async loadCards() {
+				await this.daysInMonth()
+				await this.loadData()
+				if (
+					this.currentMonth === new Date(Date.now()).getMonth() &&
+					this.currentYear === new Date(Date.now()).getFullYear()
+				) {
+					const leftScroll = this.$refs[this.currentDay][0].offsetLeft
+					this.$el.children[1].children[0].children[1].scrollLeft = leftScroll - window.innerWidth / 6
+				} else {
+					this.$el.children[1].children[0].children[1].scrollLeft = 0
+				}
+			},
 			daysInMonth() {
 				this.countDays =
 					32 -
 					new Date(new Date(Date.now()).getFullYear(), new Date(Date.now()).getMonth(), 32).getDate()
 			},
 			loadData() {
+				this.objectLoad = []
 				for (let i = 0; i < this.countDays; i++) {
 					this.objectLoad.push({
 						day: i + 1,
@@ -103,19 +147,65 @@
 					})
 				}
 			},
+			addNewActivity(day, month) {
+				this.modalACtivity = !this.modalACtivity
+				this.modalDay = day
+				this.modalMonth = month
+			},
+			trackActivityHandler() {
+				this.modalTrackActivity = !this.modalTrackActivity
+			},
+			closeWindow() {
+				this.modalACtivity = false
+				this.modalTrackActivity = false
+			},
+			setToday() {
+				const now = new Date()
+				this.value = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+			},
+			clearDate() {
+				this.value = ''
+			},
+			changeDate(e) {
+				const newDate = e.target.value.split('-')
+				this.currentYear = +newDate[0]
+				this.currentMonth = +newDate[1] - 1
+				console.log(this.currentYear, this.currentMonth)
+				this.loadCards()
+			},
 		},
 	}
 </script>
 
 <style lang="scss" scoped>
 	.activity {
-		margin-left: 15%;
-		height: calc(100vh - 50px);
+		margin-left: 16%;
+		height: calc(100vh - 40px);
 		&__wrapper {
 			display: flex;
 			flex-direction: column;
 			height: 100%;
 			min-height: 100%;
+			&__menu {
+				display: flex;
+				justify-content: space-around;
+				&__track {
+					font-size: 0.9rem;
+					height: 30px;
+					width: 120px;
+					white-space: nowrap;
+					text-align: center;
+					display: flex;
+					align-items: center;
+					margin-top: 20px;
+					background-color: #95e2ec;
+					border: none;
+					color: black;
+					&:hover {
+						background-color: #147581;
+					}
+				}
+			}
 			&__wrap {
 				height: 100%;
 				display: flex;
@@ -212,5 +302,10 @@
 				}
 			}
 		}
+	}
+	#start {
+		margin-top: 20px;
+		border-radius: 3px;
+		border: 2px solid #95e2ec;
 	}
 </style>
