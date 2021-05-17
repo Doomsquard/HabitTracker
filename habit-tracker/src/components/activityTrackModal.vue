@@ -19,10 +19,10 @@
 					</b-input-group>
 
 					<div>
-						<b-button class="create-button" v-if="!running" @click="start">Start</b-button>
-						<b-button class="create-button" v-else @click="stop">Pause</b-button>
-						<b-button class="create-button">Done</b-button>
-						<b-button class="create-button">Undo</b-button>
+						<b-button class="create-button" v-if="!running" @click="start">Старт</b-button>
+						<b-button class="create-button" v-else @click="stop">Пауза</b-button>
+						<b-button class="create-button">Готово</b-button>
+						<b-button class="create-button">Отменить</b-button>
 					</div>
 				</div>
 			</div>

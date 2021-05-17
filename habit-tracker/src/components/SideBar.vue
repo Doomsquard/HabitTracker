@@ -3,19 +3,19 @@
 		<div class="aside__nav">
 			<div @click="activeHandler('activityPage')" :class="['aside__nav__item', activityActive]">
 				<img class="aside__nav__item__img" src="@/assets/img/activity.svg" alt="activity" />
-				<p class="aside__nav__item__title">Activity</p>
+				<p class="aside__nav__item__title">Активность</p>
 			</div>
 			<div :class="['aside__nav__item', activityHabits]" @click="activeHandler('habitPage')">
 				<img class="aside__nav__item__img" src="@/assets/img/habits.svg" alt="habits" />
-				<p class="aside__nav__item__title">Habits</p>
+				<p class="aside__nav__item__title">Привычки</p>
 			</div>
 			<div :class="['aside__nav__item', activityStats]" @click="activeHandler('statsPage')">
 				<img class="aside__nav__item__img" src="@/assets/img/stats.svg" alt="stats" />
-				<p class="aside__nav__item__title">Statistics</p>
+				<p class="aside__nav__item__title">Статистика</p>
 			</div>
 			<div :class="['aside__nav__item', activityMenu]" @click="activeHandler('balancePage')">
 				<img class="aside__nav__item__img" src="@/assets/img/wheel.svg" alt="Balance" />
-				<p class="aside__nav__item__title" style="white-space: nowrap;">Balance Wheel</p>
+				<p class="aside__nav__item__title" style="white-space: nowrap;">Колесо баланса</p>
 			</div>
 		</div>
 	</aside>

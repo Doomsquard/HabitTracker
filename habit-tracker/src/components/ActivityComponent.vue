@@ -20,7 +20,7 @@
 						value="2021-05"
 					/>
 					<b-button class="activity__wrapper__menu__track" @click="trackActivityHandler"
-						>Track Activity</b-button
+						>Отследить Активность</b-button
 					>
 				</div>
 				<div class="activity__wrapper__wrap">
@@ -44,12 +44,12 @@
 							<div class="activity__wrapper__card__main">
 								<div class="activity__wrapper__card__main__item">
 									<div class="activity__wrapper__card__main__info">
-										<div class="activity__wrapper__card__main__segment">segment</div>
-										<div class="activity__wrapper__card__main__name">name</div>
-										<div class="activity__wrapper__card__main__time">time</div>
+										<div class="activity__wrapper__card__main__segment">Сегмент</div>
+										<div class="activity__wrapper__card__main__name">Название</div>
+										<div class="activity__wrapper__card__main__time">Время</div>
 									</div>
 									<div class="activity__wrapper__card__main__state">
-										state
+										Состояние
 									</div>
 								</div>
 							</div>
@@ -88,23 +88,23 @@
 				objectLoad: [],
 				value: null,
 				monthName: {
-					0: 'January',
-					1: 'February',
-					2: 'March',
-					3: 'April',
-					4: 'May',
-					5: 'June',
-					6: 'July',
-					7: 'August',
+					0: 'Января',
+					1: 'Февраля',
+					2: 'Марта',
+					3: 'Апреля',
+					4: 'Мая',
+					5: 'Июня',
+					6: 'Июля',
+					7: 'Августа',
 				},
 				dayName: {
-					0: 'Sunday',
-					1: 'Monday',
-					2: 'Tuesday',
-					3: 'Wednesday',
-					4: 'Thursday',
-					5: 'Friday',
-					6: 'Saturday',
+					0: 'Воскресенье',
+					1: 'Понедельник',
+					2: 'Вторник',
+					3: 'Среда',
+					4: 'Четверг',
+					5: 'Пятница',
+					6: 'Суббота',
 				},
 				modalACtivity: false,
 				modalTrackActivity: false,
@@ -192,7 +192,6 @@
 				&__track {
 					font-size: 0.9rem;
 					height: 30px;
-					width: 120px;
 					white-space: nowrap;
 					text-align: center;
 					display: flex;

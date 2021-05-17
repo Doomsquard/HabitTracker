@@ -4,7 +4,7 @@
 			<div class="modal-activity__window">
 				<div class="modal-activity__window__header">
 					<div>
-						New Activity
+						Новая активность
 					</div>
 					<div>{{ currentDay }} {{ currentMonth }}</div>
 				</div>
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 					<div>
-						<b-button class="create-button">Create</b-button>
+						<b-button class="create-button">Создать</b-button>
 					</div>
 				</div>
 			</div>

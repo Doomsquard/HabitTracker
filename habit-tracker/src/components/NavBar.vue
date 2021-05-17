@@ -16,11 +16,11 @@
 						style="padding: 5px 8px 0 0;"
 						@click="settingHandler"
 					>
-						<p>Settings</p>
+						<p>Профиль</p>
 						<b-icon style="opacity:0.5" icon="gear-fill" aria-hidden="true" scale="1.2"></b-icon>
 					</div>
 					<div @click="logout" style="margin-bottom:10px" class="navbar__rightside__dropdawn__item">
-						<p>Log out</p>
+						<p>Выход</p>
 						<img style="max-width: 20px;opacity:0.5;" src="@/assets/img/logout.svg" alt="" />
 					</div>
 				</div>

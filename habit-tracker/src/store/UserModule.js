@@ -18,8 +18,8 @@ export default {
 		},
 	},
 	actions: {
-		getProfileData({ commit }, payload) {
-			Api.get('/profile')
+		async getProfileData({ commit }, payload) {
+			await Api.get('/profile')
 				.then((data) => commit('SET_PROFILE_DATA', data))
 				.catch((err) => console.log(err))
 		},

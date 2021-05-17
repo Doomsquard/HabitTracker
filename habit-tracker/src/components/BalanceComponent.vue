@@ -2,7 +2,7 @@
 	<div>
 		<router-view />
 		<div class="balanceWheel">
-			<p class="balanceWheel__title">Balance Whell</p>
+			<p class="balanceWheel__title">Колесо баланса</p>
 			<Wheel class="balanceWheel__wheel" :chartdata="chartdata" :options="options" />
 		</div>
 	</div>
