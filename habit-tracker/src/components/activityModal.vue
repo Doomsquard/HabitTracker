@@ -10,23 +10,23 @@
 				</div>
 				<div class="modal-activity__window__main">
 					<b-input-group prepend="Name" class="mt-3">
-						<b-form-input></b-form-input>
+						<b-form-input v-model="name"></b-form-input>
 					</b-input-group>
 					<b-input-group prepend="Segment" class="mt-3">
-						<b-form-input></b-form-input>
+						<b-form-input v-model="segment"></b-form-input>
 					</b-input-group>
-					<b-input-group prepend="Progect" class="mt-3">
-						<b-form-input></b-form-input>
+					<b-input-group prepend="Project" class="mt-3">
+						<b-form-input v-model="project"></b-form-input>
 					</b-input-group>
 					<b-input-group prepend="Topic" class="mt-3">
-						<b-form-input></b-form-input>
+						<b-form-input v-model="topic"></b-form-input>
 					</b-input-group>
 					<div style="padding-top:20px;justify-content: center;align-items: center;" class="d-flex">
 						<div class="d-flex">
 							<p style="align-self: center;padding-top: 10px;">
 								Start:
 							</p>
-							<input type="time" style="margin: 10px;" @input="(e) => test(e)" id="" />
+							<input type="time" style="margin: 10px;" v-model="startTime" @input="(e) => test(e)" id="" />
 							<!-- <b-time id="ex-disabled-readonly" size="sm" @input="(e) => test(e)"></b-time> -->
 						</div>
 
@@ -34,12 +34,12 @@
 							<p style="align-self: center;padding-top: 10px;">
 								Finish:
 							</p>
-							<input type="time" style="margin: 10px;" @change="(e) => test(e)" id="" />
+							<input v-model="endTime" type="time" style="margin: 10px;" @change="(e) => test(e)" id="" />
 							<!-- <b-time id="ex-disabled-readonly" size="sm" @input="(e) => test(e)"></b-time> -->
 						</div>
 					</div>
 					<div>
-						<b-button class="create-button">Создать</b-button>
+						<b-button class="create-button" @click="addActivity">Создать</b-button>
 					</div>
 				</div>
 			</div>
@@ -48,19 +48,73 @@
 </template>
 
 <script>
+	import Api from '../api/api'
+
 	export default {
 		name: 'activitiModal',
-		props: ['currentDay', 'currentMonth'],
+		props: ['currentDay', 'currentMonth', 'currentYear'],
+		data() {
+			return {
+				name: '',
+				segment: '',
+				project: '',
+				topic: '',
+				startTime: '',
+				endTime: '',
+				correctMonth: {
+					Января: 1,
+					Февраля: 2,
+					Марта: 3,
+					Апреля: 4,
+					Мая: 5,
+					Июня: 6,
+					Июля: 7,
+					Августа: 8,
+					Сентября: 9,
+					Октября: 10,
+					Ноября: 11,
+					Декабря: 12,
+				},
+			}
+		},
 		methods: {
 			closeWindow(e) {
 				if (e.target.className === 'modal-activity') {
 					this.$emit('closeWindow')
 				}
 			},
-			test(e) {
-				console.log(e.target.value)
+			async addActivity() {
+				const newActivity = {
+					name: this.name,
+					segment: this.segment,
+					project: this.project,
+					topic: this.topic,
+					startTime: this.correctTime('start'),
+					endTime: this.correctTime('end'),
+				}
+				Api.post('/activities', newActivity)
+					.then(() => {
+						this.$emit('closeWindow')
+						this.$emit('addActivity', newActivity)
+					})
+					.catch(() => {
+						this.$store.dispatch('tokenModule/checkToken').then(() => {
+							Api.post('/activities', newActivity).then(() => {
+								this.$emit('closeWindow')
+								this.$emit('addActivity', newActivity)
+							})
+						})
+					})
+			},
+			correctTime(type) {
+				let time
+				type === 'start' ? (time = this.startTime) : (time = this.endTime)
+				return new Date(
+					`${this.correctMonth[this.currentMonth]}.${this.currentDay}.${this.currentYear},${time}`,
+				)
 			},
 		},
+		computed: {},
 	}
 </script>
 
