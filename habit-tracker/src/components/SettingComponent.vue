@@ -4,13 +4,13 @@
 		<div class="setting">
 			<loader v-if="loading" />
 			<div v-else class="setting__wrapper">
-				<main style="margin:10px">
+				<main style="margin:50px">
 					<!-- <div>login: {{ user.login }}</div>
 					<div>email: {{ user.email }}</div>
 					<div>firstname: {{ user.firstname }}</div>
 					<div>lastname: {{ user.lastname }}</div>
 					<div>age: {{ ageHandler }}</div> -->
-					<div class="row">
+					<div class="row ml-1">
 						<div class="order-xl-2 mb-5 col-xl-4">
 							<div alt="Image placeholder" class="card card-profile">
 								<!----><!---->
@@ -204,9 +204,17 @@
 		},
 		async mounted() {
 			this.loading = true
-			await this.$store.dispatch('userModule/getProfileData')
-			const currentUser = this.$store.getters['userModule/checkUser'].data.user
-			this.user = currentUser
+			await this.$store
+				.dispatch('userModule/getProfileData')
+				.then(() => {
+					this.user = this.$store.getters['userModule/checkUser'].data.user
+				})
+				.catch(() => {
+					this.$store.dispatch('userModule/getProfileData').then(() => {
+						this.user = this.$store.getters['userModule/checkUser'].data.user
+					})
+				})
+
 			this.loading = false
 		},
 		methods: {
@@ -254,7 +262,16 @@
 
 <style lang="scss" scoped>
 	.setting {
+		overflow: auto;
 		margin-left: 15%;
 		height: calc(100vh - 50px);
+	}
+	.row {
+		margin-left: none;
+	}
+	@media (max-width: 776px) {
+		.setting {
+			margin-left: 0% !important;
+		}
 	}
 </style>

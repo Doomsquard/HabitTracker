@@ -143,4 +143,10 @@
 			}
 		}
 	}
+	@media (max-width: 776px) {
+		.stats {
+			margin-left: 0% !important;
+			display: inline;
+		}
+	}
 </style>

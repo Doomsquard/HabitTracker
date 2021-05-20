@@ -133,6 +133,13 @@
 				justify-content: space-around;
 				min-height: 30px;
 				border-bottom: 1.5px solid #95e2ec;
+				div {
+					min-width: 300px;
+				}
+				span {
+					display: flex;
+					justify-content: flex-start;
+				}
 			}
 			&__main {
 				flex: 1 0 0;
@@ -165,6 +172,12 @@
 		margin: 5px;
 		&:hover {
 			background: #147581;
+		}
+	}
+	@media (max-width: 767px) {
+		.modal-activity__wrapper {
+			margin-left: -150px;
+			width: 300px;
 		}
 	}
 </style>

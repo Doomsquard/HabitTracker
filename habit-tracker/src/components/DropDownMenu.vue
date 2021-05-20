@@ -1,29 +1,38 @@
 <template>
-	<aside class="aside">
-		<div class="aside__nav">
-			<div @click="activeHandler('activityPage')" :class="['aside__nav__item', activityActive]">
+	<b-dropdown size="" variant="link" toggle-class="text-decoration-none" no-caret>
+		<template #button-content
+			><img src="../assets/img/menu.svg" width="17px" /><span class="sr-only"></span>
+		</template>
+		<b-dropdown-item href="#" @click="activeHandler('activityPage')"
+			><div :class="['aside__nav__item', activityActive]">
 				<img class="aside__nav__item__img" src="@/assets/img/activity.svg" alt="activity" />
 				<p class="aside__nav__item__title">Активность</p>
-			</div>
-			<div :class="['aside__nav__item', activityHabits]" @click="activeHandler('habitPage')">
+			</div></b-dropdown-item
+		>
+		<b-dropdown-item href="#" @click="activeHandler('habitPage')"
+			><div :class="['aside__nav__item', activityHabits]">
 				<img class="aside__nav__item__img" src="@/assets/img/habits.svg" alt="habits" />
 				<p class="aside__nav__item__title">Привычки</p>
-			</div>
-			<div :class="['aside__nav__item', activityStats]" @click="activeHandler('statsPage')">
+			</div></b-dropdown-item
+		>
+		<b-dropdown-item href="#" @click="activeHandler('statsPage')"
+			><div :class="['aside__nav__item', activityStats]">
 				<img class="aside__nav__item__img" src="@/assets/img/stats.svg" alt="stats" />
 				<p class="aside__nav__item__title">Статистика</p>
-			</div>
-			<div :class="['aside__nav__item', activityMenu]" @click="activeHandler('balancePage')">
+			</div></b-dropdown-item
+		>
+		<b-dropdown-item @click="activeHandler('balancePage')" href="#"
+			><div :class="['aside__nav__item', activityMenu]">
 				<img class="aside__nav__item__img" src="@/assets/img/wheel.svg" alt="Balance" />
 				<p class="aside__nav__item__title" style="white-space: nowrap;">Колесо баланса</p>
-			</div>
-		</div>
-	</aside>
+			</div></b-dropdown-item
+		>
+	</b-dropdown>
 </template>
 
 <script>
 	export default {
-		name: 'sideBar',
+		name: 'DropDownMenu',
 		data() {
 			return {
 				currentLocation: null,
@@ -57,7 +66,10 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+	.dropdown-menu {
+		left: -100px;
+	}
 	.aside {
 		position: absolute;
 		width: 15%;
@@ -79,10 +91,6 @@
 				padding: 10px;
 				display: flex;
 				cursor: pointer;
-				&:hover {
-					background-color: rgb(244, 245, 247);
-					text-decoration: none;
-				}
 				&__title {
 					margin: 0px 0px 0 20px;
 				}
@@ -107,16 +115,5 @@
 			rgba(9, 30, 66, 0.08) 1px,
 			rgba(9, 30, 66, 0) 4px
 		);
-	}
-	.activeTab {
-		background-color: rgb(149, 226, 236);
-		&:hover {
-			background-color: rgb(149, 226, 236);
-		}
-	}
-	@media (max-width: 776px) {
-		.aside {
-			display: none;
-		}
 	}
 </style>

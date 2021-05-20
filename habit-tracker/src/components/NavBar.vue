@@ -4,24 +4,29 @@
 			<div class="navbar__leftside" style="cursor:pointer" @click="mainHandler">
 				Habit Tracker
 			</div>
-			<div class="navbar__rightside">
-				<div class="navbar__rightside__avatar">
-					<div @click="showProfileDropdawn = !showProfileDropdawn">
-						<b-avatar alt="profile"></b-avatar>
-					</div>
+			<div class="navbar__rightside d-flex">
+				<div>
+					<DropDownMenu class="dropwond__menu" />
 				</div>
-				<div class="navbar__rightside__dropdawn" v-show="showProfileDropdawn">
-					<div
-						class="navbar__rightside__dropdawn__item"
-						style="padding: 5px 8px 0 0;"
-						@click="settingHandler"
-					>
-						<p>Профиль</p>
-						<b-icon style="opacity:0.5" icon="gear-fill" aria-hidden="true" scale="1.2"></b-icon>
+				<div>
+					<div class="navbar__rightside__avatar">
+						<div @click="showProfileDropdawn = !showProfileDropdawn">
+							<b-avatar alt="profile"></b-avatar>
+						</div>
 					</div>
-					<div @click="logout" style="margin-bottom:10px" class="navbar__rightside__dropdawn__item">
-						<p>Выход</p>
-						<img style="max-width: 20px;opacity:0.5;" src="@/assets/img/logout.svg" alt="" />
+					<div class="navbar__rightside__dropdawn" v-show="showProfileDropdawn">
+						<div
+							class="navbar__rightside__dropdawn__item"
+							style="padding: 5px 8px 0 0;"
+							@click="settingHandler"
+						>
+							<p>Профиль</p>
+							<b-icon style="opacity:0.5" icon="gear-fill" aria-hidden="true" scale="1.2"></b-icon>
+						</div>
+						<div @click="logout" style="margin-bottom:10px" class="navbar__rightside__dropdawn__item">
+							<p>Выход</p>
+							<img style="max-width: 20px;opacity:0.5;" src="@/assets/img/logout.svg" alt="" />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -32,10 +37,11 @@
 
 <script>
 	import SideBar from '@/components/SideBar'
+	import DropDownMenu from '@/components/DropDownMenu'
 
 	export default {
 		name: 'navBar',
-		components: { SideBar },
+		components: { SideBar, DropDownMenu },
 		data() {
 			return {
 				showProfileDropdawn: false,
@@ -112,5 +118,14 @@
 			rgba(9, 30, 66, 0.08) 1px,
 			rgba(9, 30, 66, 0) 4px
 		);
+	}
+	.dropwond__menu {
+		display: none;
+	}
+
+	@media (max-width: 776px) {
+		.dropwond__menu {
+			display: block;
+		}
 	}
 </style>

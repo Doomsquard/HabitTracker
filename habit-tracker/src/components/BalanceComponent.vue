@@ -80,4 +80,9 @@
 			margin-top: 50px;
 		}
 	}
+	@media (max-width: 776px) {
+		.balanceWheel {
+			margin-left: 0% !important;
+		}
+	}
 </style>

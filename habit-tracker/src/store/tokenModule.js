@@ -50,6 +50,9 @@ export default {
 								newToken,
 							})
 						})
+						.then(() => {
+							location.href = location.href
+						})
 						.catch(() => {
 							router.push({ name: 'signInPage' })
 							localStorage.removeItem('access_token')
